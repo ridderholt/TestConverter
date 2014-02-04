@@ -4,12 +4,17 @@ module Converter
         let str = line.Trim() 
         match str with
         | "[TestMethod]" -> "\t\t[Fact]"
-        | "[ClassInitialize]" -> ""
-        | "[TestInitialize]" -> ""
-        | "[TestClass]" -> ""
-        | "base.Setup();" -> ""
         | "public override void Setup()" -> ["\t\t";"public "; className; "()"] |> String.concat ""
         | _ -> line
+
+    let keepLine (line:string) = 
+        let str = line.Trim()
+        match str with
+        | "[ClassInitialize]" -> false 
+        | "[TestInitialize]" -> false 
+        | "[TestClass]" -> false 
+        | "base.Setup();" -> false
+        | _ -> true
 
     let containsName (line:string) = 
         let isClassName = line.Trim().StartsWith("public class")         
