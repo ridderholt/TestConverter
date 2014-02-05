@@ -9,7 +9,9 @@ let main argv =
 
     let rows = System.IO.File.ReadAllLines(path)
     let className = rows |> Array.find containsName |> extractName
-    let transformed = rows |> Array.filter keepLine |> Array.map (fun line -> parseLine(line, className))
+    let initIndex = rows |> Array.findIndex findClassInit
+    let trans = filterOnIndex(initIndex, rows)
+    let transformed = trans |> Array.filter keepLine |> Array.map (fun line -> parseLine(line, className))
 
     System.IO.File.WriteAllLines(path, transformed)
 

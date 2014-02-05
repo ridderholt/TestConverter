@@ -1,5 +1,4 @@
-﻿
-module Converter
+﻿module Converter
     let parseLine (line:string, className:string) =
         let str = line.Trim() 
         match str with
@@ -32,6 +31,15 @@ module Converter
         let name = line.Trim() |> removeClass |> removeBase
         name
                
+    let findClassInit (line:string) = 
+        let str = line.Trim()
+        let isInit = str.Equals("public static void ClassTestInit(TestContext context)")
+        isInit
 
-                
+    let filterOnIndex (index:int, arr) = 
+        let nArr = [| 
+                        for i=0 to Array.length arr - 1 do
+                            if i < index || i > (index + 4) then yield arr.[i]
+                   |]
+        nArr
 
