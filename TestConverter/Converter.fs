@@ -28,19 +28,25 @@
         let cleaned = line.Trim().Replace(" : ServiceTestBase", "") 
         cleaned
             
-    let extractName (line:string) = 
-        let name = line.Trim() |> removeClass |> removeBase
-        name
+    let extractName (line:string option) = 
+        if line.IsNone then
+            ""
+        else
+            let name = line.Value.Trim() |> removeClass |> removeBase
+            name
                
     let findClassInit (line:string) = 
         let str = line.Trim()
         let isInit = str.Equals("public static void ClassTestInit(TestContext context)")
         isInit
 
-    let filterOnIndex (index:int, arr) = 
-        let nArr = [| 
-                        for i=0 to Array.length arr - 1 do
-                            if i < index || i > (index + 4) then yield arr.[i]
-                   |]
-        nArr
+    let filterOnIndex (index:int option, arr) = 
+        if index.IsNone then
+            arr
+        else
+            let nArr = [| 
+                            for i=0 to Array.length arr - 1 do
+                                if i < index.Value || i > (index.Value + 4) then yield arr.[i]
+                       |]
+            nArr
 
