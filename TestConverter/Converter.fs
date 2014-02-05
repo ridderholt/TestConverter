@@ -15,6 +15,7 @@
         | "base.Setup();" -> false
         | _ -> true
 
+
     let containsName (line:string) = 
         let isClassName = line.Trim().StartsWith("public class")         
         isClassName
