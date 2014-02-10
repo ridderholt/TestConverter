@@ -20,9 +20,10 @@ let convertFile (path:string) =
 [<EntryPoint>]
 let main argv = 
 
-    let files = System.IO.Directory.GetFiles(@"D:\Workspace\Repos\laget.se\laget.Test\", "*.cs", System.IO.SearchOption.AllDirectories)
+    let files = System.IO.Directory.GetFiles(@"D:\Workspace\Repos\laget.se\web\laget.Test\", "*.cs", System.IO.SearchOption.AllDirectories)
     
-    //let path = "D:\Workspace\Repos\laget.se\laget.Test\Core\Services\MemeberFeesTests\SaveFeeTests.cs"
+//    let files = [| "D:\Workspace\Repos\laget.se\web\laget.Test\Core\Services\DistributionServiceTests\DistributionServiceTest.cs" |]
+
     files |> Array.Parallel.iter (fun path -> convertFile path)
     
     0 
