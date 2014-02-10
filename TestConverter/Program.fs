@@ -22,7 +22,7 @@ let main argv =
 
     let files = System.IO.Directory.GetFiles(@"D:\Workspace\Repos\laget.se\web\laget.Test\", "*.cs", System.IO.SearchOption.AllDirectories)
     
-//    let files = [| "D:\Workspace\Repos\laget.se\web\laget.Test\Core\Services\DistributionServiceTests\DistributionServiceTest.cs" |]
+//    let files = [| "D:\Workspace\Repos\laget.se\web\laget.Test\Core\External\SportwireVideo\VideoPlayerRGBColorTests.cs" |]
 
     files |> Array.Parallel.iter (fun path -> convertFile path)
     
